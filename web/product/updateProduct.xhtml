@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Update Product</title>
+                <link href="css/cssLayout.css" rel="stylesheet"/>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="150" closable="true" collapsible="true">
+                    <center><img src="../resources/images/header/Neo.png" height="100" width=""/></center>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="70">
+                    <center>
+                        <h6 id="footer">Neo Technologies Ltd. || @ CopyRight By Md. Emran Hossain || email: emranhos1@gmail.com</h6>
+                    </center>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Category" collapsible="true">
+                    <p:menu>
+                        <p:menuitem value="Home" url="../index.xhtml" />
+                        <p:menuitem value="Product" url="../product/product.xhtml" />
+                        <p:menuitem value="Employees" url="../employee/employee.xhtml" />
+                        <p:menuitem value="Payment" url="../payment/employeePayment.xhtml" />
+                        <p:menuitem value="Log Out" url="../index.xhtml" />
+                    </p:menu>
+                </p:layoutUnit>
+
+
+                <p:dialog id="addPro" widgetVar="addPro" header="Add Product" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">  
+                    <h:form>
+                        <p:panelGrid columns="2">
+                                <p:outputLabel value="Product Name :"/>
+                                <p:inputText id="pName" value="#{productMB.product.proName}"/>
+
+                                <p:outputLabel value="Product Details :"/>
+                                <p:inputText id="pdetails" value="#{productMB.product.proDetails}"/>
+
+                                <p:outputLabel value="Product Perchased :"/>
+                                <p:inputText id="pQty" value="#{productMB.product.qty}"/>
+
+                                <p:outputLabel value="Product Price :"/>
+                                <p:inputText id="pPrice" value="#{productMB.product.price}"/>
+                            </p:panelGrid>
+                            <p:commandButton id="submit" value="Submit" action="#{productMB.addProduct()}" update="mag"/>
+                            <p:commandButton id="cancel" value="Cancel" onclick="handleComplete(xhr, status, args)" />  
+                            <p:messages id="mag" closable="true" ></p:messages>
+                    </h:form>
+                </p:dialog>
+                <h:outputScript>  
+                    /*<![CDATA[*/  
+                    function handleComplete(xhr, status, args) {  
+                    if(args && args.validName) {  
+                    addEmp.hide();
+                    }  
+                    }/* ]]>*/
+                </h:outputScript>
+
+                <p:dialog id="proUpdate" widgetVar="$proUpdate" header="Update Product" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">  
+                    <h:form>
+                        <p:panelGrid columns="2">                          
+                            <h:outputLabel for="pname" value="Product Name: *" />  
+                            <p:inputText id="pname" value="#{productMB.newProduct.proName}" label="Priduct Name" placeholder="Product Name" />               
+                            <h:outputLabel for="pDetails" value="Details :" />  
+                            <p:inputText id="pdetails" value="#{productMB.newProduct.proDetails}" label="Details" placeholder="Details" />
+                            <h:outputLabel for="price" value="Price :" />  
+                            <p:inputText id="price" value="#{productMB.newProduct.price}" label="Price" placeholder="Price" />
+                            <h:outputLabel for="qty" value="Quantity : *" />  
+                            <p:inputText id="qty" value="#{productMB.newProduct.qty}" label="Quantity" placeholder="Quantity"/>
+                            <p:commandButton value="Update" ajax="true" icon="ui-icon-disk" update=":fromPro:proTable" actionListener="#{productMB.updateProduct(productMB.newProduct)}" oncomplete="handleComplete(xhr, status, args)" />  
+                            <p:commandButton value="Cancel" id="cancelButtonId" onclick="handleComplete(xhr, status, args)" />  
+                        </p:panelGrid>  
+                    </h:form> 
+                </p:dialog> 
+                <h:outputScript id="handleCompleteScript" target="body">  
+                    /* 
+                    <![CDATA[ */  
+                    function handleComplete(xhr, status, args) {  
+                    if(args && args.validName) {  
+                    $proUpdate.hide();  
+                    }  
+                    }  
+                    /* ]]>*/  
+                </h:outputScript>
+                <p:dialog id="proDelete" widgetVar="$proDelete" header="Delete Product" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">  
+                    <h:form>  
+                        <h:inputHidden value="#{productMB.newProduct.id}" />
+                        <p:panelGrid columns="2">
+                            <p:commandButton value="Delete" ajax="true" icon="ui-icon-trash" update=":fromPro:proTable" actionListener="#{productMB.deleteProduct(productMB.newProduct)}" oncomplete="handleComplete2(xhr, status, args)" />  
+                            <p:commandButton value="Cancel" id="cancelButtonId" onclick="handleComplete2(xhr, status, args)" />  
+                        </p:panelGrid>  
+                    </h:form>  
+
+                </p:dialog>  
+                <h:outputScript id="handleCompleteScript" target="body">  
+                    /* 
+                    <![CDATA[ */  
+                    function handleComplete2(xhr, status, args) {  
+                    if(args && args.validName) {  
+                    $proDelete.hide();  
+                    }  
+                    }  
+                    /* ]]>*/  
+                </h:outputScript>
+                <p:layoutUnit position="center">
+                    <center>
+                        <h1>Update Product</h1>
+                        <h:form id="fromPro">
+                            <p:commandButton icon="ui-icon-plusthick" id="addPro" value="Add Product" update="proTable" ajax="true" oncomplete="PF('addPro').show()"/>
+
+                            <p:dataTable resizableColumns="true" var="pro" value="#{displayProductMB.allProduct}" paginator="true" rows="5" id="proTable">
+                                <p:column headerText="Record No" style="text-align: left;">
+                                    <h:outputText value="#{pro.id}" />  
+                                </p:column>
+                                <p:column headerText="Product Name :" style="text-align: left;">
+                                    <h:outputText value="#{pro.proName}" />  
+                                </p:column>
+                                <p:column headerText="Details :" style="text-align: left;">
+                                    <h:outputText value="#{pro.proDetails}" />  
+                                </p:column>
+                                <p:column headerText="Price" style="text-align: left;">
+                                    <h:outputText value="#{pro.price}" />  
+                                </p:column>
+                                <p:column headerText="Quantity" style="text-align: left;">
+                                    <h:outputText value="#{pro.qty}" />  
+                                </p:column>
+                                <p:column headerText="Edit" style="text-align: center">  
+                                    <p:commandButton icon="ui-icon-pencil" id="editUserBtn" value="Edit" ajax="true" actionListener="#{productMB.changePro(pro)}" update=":proUpdate" oncomplete="PF('$proUpdate').show()" />
+                                </p:column>
+                                <p:column headerText="Delete" style="text-align: center">  
+                                    <p:commandButton icon="ui-icon-trash" id="deleteUserBtn" value="Delete" ajax="true" actionListener="#{productMB.changePro(pro)}" update=":proDelete" oncomplete="PF('$proDelete').show()" />  
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>                 
+                    </center>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

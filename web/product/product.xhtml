@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Product</title>
+                <link href="css/cssLayout.css" rel="stylesheet"/>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="150" closable="true" collapsible="true">
+                    <center><img src="../resources/images/header/Neo.png" height="100" width=""/></center>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="70">
+                    <center>
+                        <h6 id="footer">Neo Technologies Ltd. || @ CopyRight By Md. Emran Hossain || email: emranhos1@gmail.com</h6>
+                    </center>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Category" collapsible="true">
+                    <p:menu>
+                        <p:menuitem value="Home" url="../admin/admin.xhtml" />
+                        <p:menuitem value="Product" url="../product/product.xhtml" />
+                        <p:menuitem value="Employees" url="../employee/employee.xhtml" />
+                        <p:menuitem value="Payment" url="../payment/employeePayment.xhtml" />
+                        <p:menuitem value="Log Out" url="../index.xhtml" />
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form>
+                        <center>
+                            <strong><h1>Product Information</h1>
+                                <p:commandButton id="empDetl" value="Product Details" action="#{productMB.proDetails()}" styleClass="ui-priority-primary" /><br/><br/>
+                                <p:commandButton id="empAdd" value="Add Product" action="#{productMB.proAdd()}" styleClass="ui-priority-primary"/><br/><br/>
+                                <p:commandButton id="empUp" value="Update Product" action="#{productMB.proUpdate()}" styleClass="ui-priority-primary"/><br/><br/>
+                            </strong>
+                        </center>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

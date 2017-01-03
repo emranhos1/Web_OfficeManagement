@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Add Employees</title>
+                <link href="css/cssLayout.css" rel="stylesheet"/>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form>
+                <p:layout fullPage="true">
+                    <p:layoutUnit position="north" size="150" closable="true" collapsible="true">
+                        <center><img src="../resources/images/header/Neo.png" height="100" width=""/></center>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="south" size="70">
+                        <center>
+                            <h6 id="footer">Neo Technologies Ltd. || @ CopyRight By Md. Emran Hossain || email: emranhos1@gmail.com</h6>
+                        </center>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="west" size="175" header="Category" collapsible="true">
+                        <p:menu>
+                            <p:menuitem value="Home" url="../index.xhtml" />
+                            <p:menuitem value="Product" url="../product/product.xhtml" />
+                            <p:menuitem value="Employees" url="../employee/employee.xhtml" />
+                            <p:menuitem value="Payment" url="../payment/employeePayment.xhtml" />
+                            <p:menuitem value="Log Out" url="../index.xhtml" />
+                        </p:menu>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+                        <center>
+                            <h1>Add Employee</h1>
+                            <h:form id="form">
+                                <p:messages id="mag" closable="true" ></p:messages>
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="First Name :"/>
+                                    <p:inputText id="fname" value="#{employeeMB.employee.fname}"/>
+
+                                    <p:outputLabel value="Last Name :"/>
+                                    <p:inputText id="lname" value="#{employeeMB.employee.lname}"/>
+
+                                    <p:outputLabel value="Gender :"/>
+                                    <p:selectOneRadio id="gender" value="#{employeeMB.employee.gender}">
+                                        <f:selectItem itemLabel="Male" itemValue="Male"/>
+                                        <f:selectItem itemLabel="Female" itemValue="Female"/>
+                                    </p:selectOneRadio>
+
+                                    <p:outputLabel value="Salary :"/>
+                                    <p:inputText id="salary" value="#{employeeMB.employee.salary}"/>
+
+                                    <p:outputLabel value="Address :"/>
+                                    <p:inputText id="address" value="#{employeeMB.employee.address}"/>
+
+                                    <p:outputLabel value="District :"/>
+                                    <p:selectOneMenu id="console" value="#{employeeMB.employee.district}" style="width:125px">
+                                        <f:selectItem itemLabel="Select One" itemValue="" />
+                                        <f:selectItem itemLabel="Dhaka" itemValue="Dhaka" />
+                                        <f:selectItem itemLabel="Barishal" itemValue="Barishal" />
+                                        <f:selectItem itemLabel="Khulna" itemValue="Khulna" />
+                                        <f:selectItem itemLabel="Rajshahi" itemValue="Rajshahi" />
+                                        <f:selectItem itemLabel="Manikgonj" itemValue="Manikgonj" />
+                                        <f:selectItem itemLabel="Savar" itemValue="Savar" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Country :"/>
+                                    <p:inputText id="country" value="#{employeeMB.employee.country}"/>
+
+                                    <p:outputLabel value="Phone No :"/>
+                                    <p:inputText id="pNo" value="#{employeeMB.employee.phone}"/>
+
+                                    <p:outputLabel value="Email :"/>
+                                    <p:inputText id="email" value="#{employeeMB.employee.email}"/>
+
+                                    <p:outputLabel value="Date of Birth :"/>
+                                    <p:calendar id="dob" value="#{employeeMB.employee.dateofBirth}" label="DatePosted:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Date of Birth!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Date of Birth" />
+                                </p:panelGrid>
+                                <p:commandButton id="submit" value="Submit" action="#{employeeMB.addemployee()}" update="mag"/>
+                            </h:form>                    
+                        </center>
+                    </p:layoutUnit>
+
+                </p:layout>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>

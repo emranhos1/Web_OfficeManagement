@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Employees Details</title>
+                <link href="css/cssLayout.css" rel="stylesheet"/>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="150" closable="true" collapsible="true">
+                    <center><img src="../resources/images/header/Neo.png" height="100" width=""/></center>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="70">
+                    <center>
+                        <h6 id="footer">Neo Technologies Ltd. || @ CopyRight By Md. Emran Hossain || email: emranhos1@gmail.com</h6>
+                    </center>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Category" collapsible="true">
+                    <p:menu>
+                        <p:menuitem value="Home" url="../admin/admin.xhtml" />
+                        <p:menuitem value="Product" url="../product/product.xhtml" />
+                        <p:menuitem value="Employees" url="../employee/employee.xhtml" />
+                        <p:menuitem value="Payment" url="../payment/employeePayment.xhtml" />
+                        <p:menuitem value="Log Out" url="../index.xhtml" />
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="form">
+                        <p:dataTable var="emp" value="#{displayEmployeeMB.allEmployee}" resizableColumns="true">
+                            <f:facet name="header"><h2><strong>Details</strong></h2></f:facet>
+                            <p:column headerText="First Name">
+                                <h:outputText value="#{emp.fname}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Last Name">
+                                <h:outputText value="#{emp.lname}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Gender">
+                                <h:outputText value="#{emp.gender}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Salary">
+                                <h:outputText value="#{emp.salary}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Adderss">
+                                <h:outputText value="#{emp.address}"/>
+                            </p:column>
+                            
+                            <p:column headerText="District">
+                                <h:outputText value="#{emp.district}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Country">
+                                <h:outputText value="#{emp.country}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Phone">
+                                <h:outputText value="#{emp.phone}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Email">
+                                <h:outputText value="#{emp.email}"/>
+                            </p:column>
+                            <p:column headerText="Date of Birth">
+                                <h:outputText value="#{emp.dateofBirth}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
